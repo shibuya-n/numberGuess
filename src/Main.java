@@ -6,6 +6,7 @@ import java.util.*;
 
     public class Main {
         public static int score = 0;
+        public static int toGuess;
         public static void main(String[] args) {
 
             boolean yesNo = ask();
@@ -37,6 +38,7 @@ import java.util.*;
 
         public static int levelSelect(){
             Scanner getInt = new Scanner(System.in);
+            System.out.println();
             System.out.println("Which difficulty level do would you like to play? [1, 2, 3]");
 
             return getInt.nextInt();
@@ -47,12 +49,15 @@ import java.util.*;
 
             try {
                 if (x == 1){
+                    toGuess = (int)(Math.random() * 11);
                     levelOne();
                 }
                 else if (x == 2){
+                    toGuess = (int)(Math.random() * 51);
                     levelTwo();
                 }
                 else {
+                    toGuess = (int)(Math.random() * 101);
                     levelThree();
                 }
             }
@@ -65,21 +70,21 @@ import java.util.*;
         public static int guessModule(){
             Scanner input = new Scanner(System.in);
             System.out.println("What is your guess? ");
-            int guess = input.nextInt();
-            return guess;
+            int userGuess = input.nextInt();
+            return userGuess;
         }
 
         //level one
         public static void levelOne() {
-            int toGuess = (int)(Math.random() * 11);
 
+            System.out.println();
             System.out.println("Range is between 0 - 10");
 
             System.out.println(toGuess);
 
-            int guess = guessModule();
+            int guess1 = guessModule();
 
-            if (guess == toGuess) {
+            if (guess1 == toGuess) {
                 System.out.println("gg");
                 System.out.println("you earned a point");
                 score++;
@@ -87,24 +92,29 @@ import java.util.*;
 
                 play();
             }
-            else if (guess > toGuess) {
+            else if (guess1 > toGuess) {
                 System.out.println("incorrect.");
                 System.out.println("number is lower.");
                 guessModule();
+                levelOne();
             }
            else {
                 System.out.println("incorrect.");
                 System.out.println("number is higher.");
                 guessModule();
+                levelOne();
             }
 
             }
 
         //level two
         public static void levelTwo() {
-            int toGuess = (int)(Math.random() * 51);
 
+            System.out.println();
             System.out.println("Range is between 0 - 50");
+
+
+            System.out.println(toGuess);
 
             int guess = guessModule();
 
@@ -121,19 +131,23 @@ import java.util.*;
                 System.out.println("incorrect.");
                 System.out.println("number is lower.");
                 guessModule();
+                levelTwo();
             }
             else {
                 System.out.println("incorrect.");
                 System.out.println("number is higher.");
                 guessModule();
+                levelTwo();
             }
 
         }
         //level three
         public static void levelThree() {
-            int toGuess = (int)(Math.random() * 51);
 
+            System.out.println();
             System.out.println("Range is between 0 - 100");
+
+            System.out.println(toGuess);
 
             int guess = guessModule();
 
@@ -150,11 +164,13 @@ import java.util.*;
                 System.out.println("incorrect.");
                 System.out.println("number is lower.");
                 guessModule();
+                levelThree();
             }
             else {
                 System.out.println("incorrect.");
                 System.out.println("number is higher.");
                 guessModule();
+                levelThree();
             }
 
         }
